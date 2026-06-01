@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arunkumar & Hemalatha – Reception Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;500;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8CC7A;
+    --gold-pale: #F5E9C5;
+    --cream: #FAF6EE;
+    --ivory: #FDF9F2;
+    --deep: #1A1209;
+    --brown: #3D2B0F;
+    --text: #2C1F0A;
+    --muted: #7A6540;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--deep);
+    font-family: 'Lato', sans-serif;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* Starfield background */
+  .starfield {
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(201,168,76,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(201,168,76,0.06) 0%, transparent 50%),
+      linear-gradient(180deg, #0D0A04 0%, #1A1209 50%, #0D0A04 100%);
+    z-index: 0;
+  }
+
+  .star {
+    position: fixed;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--dur, 3s) ease-in-out infinite alternate;
+  }
+  @keyframes twinkle { from { opacity: 0.1; } to { opacity: 0.8; } }
+
+  /* Main scroll wrapper */
+  .scroll-wrapper {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+  }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+    position: relative;
+    text-align: center;
+  }
+
+  .blessing {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.3s;
+  }
+
+  .ornament-top {
+    width: 280px;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.5s;
+  }
+
+  .hero-names {
+    opacity: 0;
+    animation: fadeUp 1.1s ease forwards 0.7s;
+  }
+
+  .name-groom {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.8rem, 8vw, 6rem);
+    font-weight: 700;
+    color: var(--gold-light);
+    letter-spacing: 0.06em;
+    text-shadow: 0 0 60px rgba(201,168,76,0.4);
+    line-height: 1;
+  }
+
+  .name-ampersand {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    color: var(--gold);
+    display: block;
+    margin: 8px 0;
+    opacity: 0.8;
+  }
+
+  .name-bride {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.8rem, 8vw, 6rem);
+    font-weight: 700;
+    color: var(--gold-light);
+    letter-spacing: 0.06em;
+    text-shadow: 0 0 60px rgba(201,168,76,0.4);
+    line-height: 1;
+  }
+
+  .hero-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 28px;
+    margin-bottom: 50px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1s;
+  }
+
+  .divider-gold {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.2s;
+  }
+  .divider-gold .line { width: 80px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+  .divider-gold .diamond {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+
+  /* === CARD SECTION === */
+  .section-wrapper {
+    padding: 0 16px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, rgba(253,249,242,0.97) 0%, rgba(245,233,197,0.92) 100%);
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 2px;
+    width: 100%;
+    max-width: 680px;
+    padding: 52px 48px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    box-shadow:
+      0 0 0 1px rgba(201,168,76,0.15),
+      0 30px 80px rgba(0,0,0,0.6),
+      inset 0 1px 0 rgba(255,255,255,0.6);
+  }
+  .card.visible { opacity: 1; transform: translateY(0); }
+
+  /* Corner ornaments */
+  .card::before, .card::after {
+    content: '';
+    position: absolute;
+    width: 40px; height: 40px;
+    border-color: var(--gold);
+    border-style: solid;
+  }
+  .card::before { top: 14px; left: 14px; border-width: 1.5px 0 0 1.5px; }
+  .card::after  { bottom: 14px; right: 14px; border-width: 0 1.5px 1.5px 0; }
+
+  .card-corner-tr, .card-corner-bl {
+    position: absolute;
+    width: 40px; height: 40px;
+    border-color: var(--gold);
+    border-style: solid;
+  }
+  .card-corner-tr { top: 14px; right: 14px; border-width: 1.5px 1.5px 0 0; }
+  .card-corner-bl { bottom: 14px; left: 14px; border-width: 0 0 1.5px 1.5px; }
+
+  .card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .family-block {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
+    align-items: start;
+    margin-bottom: 0;
+  }
+
+  .family-side { text-align: center; }
+  .family-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 12px;
+  }
+  .family-parents {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .family-village {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+  .family-person {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--brown);
+    margin-top: 12px;
+    display: block;
+  }
+  .family-degree {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .family-divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 24px;
+  }
+  .family-divider .vline { width: 1px; height: 60px; background: linear-gradient(180deg, transparent, var(--gold), transparent); }
+  .family-divider .fdiam { width: 10px; height: 10px; background: var(--gold); transform: rotate(45deg); }
+
+  /* === EVENT CARDS === */
+  .events-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+    max-width: 680px;
+    margin-top: 20px;
+  }
+
+  .event-card {
+    background: linear-gradient(135deg, rgba(253,249,242,0.97), rgba(245,233,197,0.9));
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 2px;
+    padding: 36px 28px;
+    text-align: center;
+    position: relative;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .event-card.visible { opacity: 1; transform: translateY(0); }
+  .event-card::before, .event-card::after {
+    content: '';
+    position: absolute;
+    width: 28px; height: 28px;
+    border-color: var(--gold);
+    border-style: solid;
+  }
+  .event-card::before { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
+  .event-card::after  { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+  .ec-tr, .ec-bl { position: absolute; width: 28px; height: 28px; border-color: var(--gold); border-style: solid; }
+  .ec-tr { top: 10px; right: 10px; border-width: 1px 1px 0 0; }
+  .ec-bl { bottom: 10px; left: 10px; border-width: 0 0 1px 1px; }
+
+  .event-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
+  .event-type {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 14px;
+  }
+  .event-detail {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--brown);
+    line-height: 1.6;
+  }
+  .event-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.92rem;
+    font-style: italic;
+    color: var(--muted);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  /* === RECEPTION HIGHLIGHT === */
+  .reception-card {
+    width: 100%;
+    max-width: 680px;
+    margin-top: 20px;
+    background: linear-gradient(160deg, #1E1508 0%, #2C1F0A 60%, #1E1508 100%);
+    border: 1px solid rgba(201,168,76,0.5);
+    border-radius: 2px;
+    padding: 52px 48px;
+    text-align: center;
+    position: relative;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    box-shadow: 0 0 0 1px rgba(201,168,76,0.1), 0 30px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(201,168,76,0.1);
+  }
+  .reception-card.visible { opacity: 1; transform: translateY(0); }
+  .reception-card::before, .reception-card::after {
+    content: '';
+    position: absolute;
+    width: 50px; height: 50px;
+    border-color: var(--gold);
+    border-style: solid;
+  }
+  .reception-card::before { top: 16px; left: 16px; border-width: 1.5px 0 0 1.5px; }
+  .reception-card::after  { bottom: 16px; right: 16px; border-width: 0 1.5px 1.5px 0; }
+  .rc-tr, .rc-bl { position: absolute; width: 50px; height: 50px; border-color: var(--gold); border-style: solid; }
+  .rc-tr { top: 16px; right: 16px; border-width: 1.5px 1.5px 0 0; }
+  .rc-bl { bottom: 16px; left: 16px; border-width: 0 0 1.5px 1.5px; }
+
+  .rec-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.45em;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .rec-venue {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: var(--gold-light);
+    text-shadow: 0 0 40px rgba(201,168,76,0.3);
+    margin-bottom: 10px;
+  }
+  .rec-location {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: rgba(201,168,76,0.7);
+    margin-bottom: 36px;
+  }
+
+  /* QR section inside dark card */
+  .qr-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(201,168,76,0.25);
+  }
+  .qr-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+  }
+  .qr-wrapper {
+    background: var(--ivory);
+    padding: 16px;
+    border: 1px solid rgba(201,168,76,0.5);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 4px rgba(201,168,76,0.1);
+  }
+  #qrcode canvas, #qrcode img { display: block; }
+  .qr-hint {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: rgba(201,168,76,0.6);
+  }
+  .map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+    margin-top: 8px;
+  }
+  .map-btn:hover { background: var(--gold); color: var(--deep); }
+
+  /* === CONTACT CARD === */
+  .contact-card {
+    width: 100%;
+    max-width: 680px;
+    margin-top: 20px;
+    background: linear-gradient(135deg, rgba(253,249,242,0.97), rgba(245,233,197,0.9));
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 2px;
+    padding: 44px 48px;
+    text-align: center;
+    position: relative;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .contact-card.visible { opacity: 1; transform: translateY(0); }
+  .contact-card::before, .contact-card::after { content: ''; position: absolute; width: 36px; height: 36px; border-color: var(--gold); border-style: solid; }
+  .contact-card::before { top: 12px; left: 12px; border-width: 1px 0 0 1px; }
+  .contact-card::after  { bottom: 12px; right: 12px; border-width: 0 1px 1px 0; }
+  .cc-tr, .cc-bl { position: absolute; width: 36px; height: 36px; border-color: var(--gold); border-style: solid; }
+  .cc-tr { top: 12px; right: 12px; border-width: 1px 1px 0 0; }
+  .cc-bl { bottom: 12px; left: 12px; border-width: 0 0 1px 1px; }
+
+  .contact-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+  .contact-phones {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .phone-item { text-align: center; }
+  .phone-role {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .phone-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--brown);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .phone-num:hover { color: var(--gold); }
+
+  /* === FOOTER === */
+  .footer {
+    text-align: center;
+    padding: 60px 24px 80px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.5s;
+  }
+  .footer-wish {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: rgba(201,168,76,0.6);
+    margin-bottom: 20px;
+  }
+  .footer-note {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: rgba(201,168,76,0.35);
+    font-family: 'Cinzel', serif;
+  }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Floating petals */
+  .petal {
+    position: fixed;
+    pointer-events: none;
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: petalFall linear infinite;
+    z-index: 0;
+  }
+  @keyframes petalFall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.4; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .card, .reception-card, .contact-card { padding: 40px 24px; }
+    .family-block { grid-template-columns: 1fr; gap: 0; }
+    .family-divider { flex-direction: row; padding: 16px 0; }
+    .family-divider .vline { width: 60px; height: 1px; }
+    .events-row { grid-template-columns: 1fr; }
+    .contact-phones { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="starfield" id="starfield"></div>
+
+<!-- Petals -->
+<div id="petals"></div>
+
+<div class="scroll-wrapper">
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="blessing">🕉 Sri Chamundeeswari Thunaai 🕉</p>
+
+    <!-- SVG Ornament -->
+    <svg class="ornament-top" viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="30" x2="100" y2="30" stroke="#C9A84C" stroke-width="0.7" opacity="0.5"/>
+      <line x1="180" y1="30" x2="280" y2="30" stroke="#C9A84C" stroke-width="0.7" opacity="0.5"/>
+      <circle cx="140" cy="30" r="22" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.7"/>
+      <circle cx="140" cy="30" r="14" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.5"/>
+      <circle cx="140" cy="30" r="4" fill="#C9A84C" opacity="0.9"/>
+      <polygon points="140,10 144,26 160,30 144,34 140,50 136,34 120,30 136,26" fill="none" stroke="#C9A84C" stroke-width="0.7" opacity="0.6"/>
+      <circle cx="100" cy="30" r="3" fill="#C9A84C" opacity="0.6"/>
+      <circle cx="180" cy="30" r="3" fill="#C9A84C" opacity="0.6"/>
+      <circle cx="70" cy="30" r="2" fill="#C9A84C" opacity="0.4"/>
+      <circle cx="210" cy="30" r="2" fill="#C9A84C" opacity="0.4"/>
+    </svg>
+
+    <div class="hero-names">
+      <div class="name-groom">Arunkumar</div>
+      <span class="name-ampersand">&</span>
+      <div class="name-bride">Hemalatha</div>
+    </div>
+
+    <p class="hero-tag">Reception Invitation</p>
+
+    <div class="divider-gold">
+      <div class="line"></div>
+      <div class="diamond"></div>
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <!-- CARDS -->
+  <div class="section-wrapper">
+
+    <!-- Family Card -->
+    <div class="card observe">
+      <div class="card-corner-tr"></div>
+      <div class="card-corner-bl"></div>
+      <p class="card-title">With the Blessings of Both Families</p>
+      <div class="family-block">
+        <div class="family-side">
+          <span class="family-label">Groom's Family</span>
+          <p class="family-parents">Thiru. K. Moorthy<br>& Tmt. M. Saraswathi</p>
+          <p class="family-village">Melpallippatu Village<br>Anaikkadu Taluk, Vellore Dist.</p>
+          <span class="family-person">M. Arunkumar</span>
+          <span class="family-degree">D.EEE., B.Tech.</span>
+        </div>
+        <div class="family-divider">
+          <div class="vline"></div>
+          <div class="fdiam"></div>
+          <div class="vline"></div>
+        </div>
+        <div class="family-side">
+          <span class="family-label">Bride's Family</span>
+          <p class="family-parents">Thiru. A.S. Thamodharan<br>& Tmt. Prema</p>
+          <p class="family-village">Aasanampattu Village<br>Anaikkadu Taluk, Vellore Dist.</p>
+          <span class="family-person">D. Hemalatha</span>
+          <span class="family-degree">DCE.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Events Row -->
+    <div class="events-row">
+      <div class="event-card observe">
+        <div class="ec-tr"></div><div class="ec-bl"></div>
+        <span class="event-icon">🛕</span>
+        <span class="event-type">Holy Wedding</span>
+        <p class="event-detail">Thirupathi Thirumala Devasthanam</p>
+        <p class="event-sub">Tirupati, Andhra Pradesh</p>
+      </div>
+      <div class="event-card observe" style="transition-delay: 0.15s;">
+        <div class="ec-tr"></div><div class="ec-bl"></div>
+        <span class="event-icon">🥂</span>
+        <span class="event-type">Grand Reception</span>
+        <p class="event-detail">Indira Mahal</p>
+        <p class="event-sub">Aasanampattu<br>Anaikkadu Taluk</p>
+        <p class="event-sub" style="margin-top:12px; font-weight:600; color:var(--brown);">Sunday, 28th June 2026</p>
+        <p class="event-sub">11:00 AM – 3:00 PM</p>
+      </div>
+    </div>
+
+    <!-- Reception Venue Card (dark, with QR) -->
+    <div class="reception-card observe" id="receptionCard">
+      <div class="rc-tr"></div><div class="rc-bl"></div>
+
+      <p class="rec-label">Reception Venue</p>
+
+      <!-- Lotus SVG -->
+      <svg viewBox="0 0 80 50" width="80" style="margin: 0 auto 20px; display:block;" xmlns="http://www.w3.org/2000/svg">
+        <path d="M40 45 C30 30, 10 30, 10 15 C10 5, 25 0, 40 10 C55 0, 70 5, 70 15 C70 30, 50 30, 40 45Z" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.7"/>
+        <path d="M40 45 C35 28, 22 22, 20 10 C28 8, 36 15, 40 45Z" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.5"/>
+        <path d="M40 45 C45 28, 58 22, 60 10 C52 8, 44 15, 40 45Z" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.5"/>
+        <circle cx="40" cy="14" r="2.5" fill="#C9A84C" opacity="0.8"/>
+      </svg>
+
+      <h2 class="rec-venue">Indira Mahal</h2>
+      <p class="rec-location">Aasanampattu, Anaikkadu Taluk, Vellore District</p>
+
+      <div class="qr-section">
+        <p class="qr-label">Scan to View the Invitation</p>
+        <div class="qr-wrapper">
+          <div id="qrcode"></div>
+        </div>
+        <p class="qr-hint">Point your phone camera — opens instantly in browser</p>
+        <a class="map-btn" href="https://cozy-toffee-2d3550.netlify.app/" target="_blank">
+          🌐 &nbsp; Open Invitation Online
+        </a>
+      </div>
+    </div>
+
+    <!-- Contact Card -->
+    <div class="contact-card observe">
+      <div class="cc-tr"></div><div class="cc-bl"></div>
+      <p class="contact-label">For Queries & Directions</p>
+      <div class="contact-phones">
+        <div class="phone-item">
+          <span class="phone-role">Contact</span>
+          <a class="phone-num" href="tel:9095107704">9095107704</a>
+        </div>
+        <div class="phone-item">
+          <span class="phone-role">Contact</span>
+          <a class="phone-num" href="tel:8248457496">8248457496</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer-wish">You and your family are cordially invited to grace the occasion and shower your blessings upon the couple.</p>
+    <p class="footer-note">Arunkumar & Hemalatha · 2026</p>
+  </footer>
+
+</div>
+
+<script>
+  // === Stars ===
+  const sf = document.getElementById('starfield');
+  for (let i = 0; i < 90; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random() * 2 + 0.5;
+    s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${2+Math.random()*4}s;animation-delay:${Math.random()*5}s;opacity:${Math.random()*0.5}`;
+    sf.appendChild(s);
+  }
+
+  // === Petals ===
+  const petalsEl = document.getElementById('petals');
+  const petalChars = ['✿', '❀', '✾', '❁', '⚘'];
+  for (let i = 0; i < 12; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.textContent = petalChars[Math.floor(Math.random() * petalChars.length)];
+    p.style.cssText = `left:${Math.random()*100}%;animation-duration:${12+Math.random()*14}s;animation-delay:${Math.random()*20}s;color:rgba(201,168,76,${0.2+Math.random()*0.3});font-size:${0.8+Math.random()*1}rem`;
+    petalsEl.appendChild(p);
+  }
+
+  // === QR Code ===
+  new QRCode(document.getElementById("qrcode"), {
+    text: "https://cozy-toffee-2d3550.netlify.app/",
+    width: 180,
+    height: 180,
+    colorDark: "#1A1209",
+    colorLight: "#FDF9F2",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+
+  // === Scroll reveal ===
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.observe').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
